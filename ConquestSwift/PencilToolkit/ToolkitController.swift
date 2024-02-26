@@ -8,13 +8,12 @@ import SwiftUI
 import UIKit
 
 class ToolkitController: UIViewController {
-    var viewModel = ViewModel()
-
     override func viewDidLoad() {
-        var toolkitHostController = UIHostingController(
+        var model = ToolkitModel()
+        let toolkitHostController = UIHostingController(
             rootView: Toolkit(
-                model: viewModel,
-                onToolPress: { tool in print(tool) }
+                model: model,
+                onToolPress: { tool in model.currentTool = tool }
             )
         )
 
@@ -31,8 +30,6 @@ class ToolkitController: UIViewController {
 
         toolkitHostController.didMove(toParent: self)
     }
-
-    override func viewDidAppear(_ animated: Bool) {}
 }
 
 #if DEBUG

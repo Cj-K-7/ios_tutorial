@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Toolkit: View {
-    @ObservedObject var model: ViewModel
+    @ObservedObject var model: ToolkitModel
 
     var sections: [ToolSectionItem] = [
         ToolSectionItem(
@@ -45,11 +45,8 @@ struct Toolkit: View {
 #if DEBUG
 struct PencilToolkitPanel_Preview: PreviewProvider {
     static var previews: some View {
-        let model = ViewModel()
+        let model = ToolkitModel()
         Toolkit(model: model, onToolPress: { tool in print(tool) })
     }
 }
 #endif
-class ViewModel: ObservableObject {
-    @Published var currentTool: Tool = .pencil
-}

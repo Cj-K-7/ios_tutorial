@@ -36,7 +36,6 @@ struct ToolButton: View {
         ) {
             Image("\(tool.icon.rawValue)-\(suffix)")
                 .resizable()
-                .foregroundStyle(.cyan)
         }
         .frame(width: 18, height: 18)
         .padding(.all, 4)
@@ -51,14 +50,22 @@ struct ToolButton: View {
 
 #if DEBUG
 struct ToolkitIconButton_Preview: PreviewProvider {
-    static var previews: some View {
-        ToolButton(.pencil, selectedTool: .eraser) { tool in
-            print(tool)
+    struct ToolButtonPreview: View {
+        @State private var selectedTool: Tool? = .pencil
+
+        var body: some View {
+            ToolButton(.pencil, selectedTool: selectedTool) { tool in
+                if selectedTool == tool {
+                    selectedTool = .eraser
+                } else {
+                    selectedTool = tool
+                }
+            }
         }
+    }
+
+    static var previews: some View {
+        ToolButtonPreview()
     }
 }
 #endif
-
-extension Notification.Name {
-    static let toolButton = Notification.Name("ToolButton")
-}
