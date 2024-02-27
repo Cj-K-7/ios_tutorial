@@ -24,7 +24,11 @@ struct ToolButton: View {
 
     var onToolPress: (Tool) -> Void
 
-    init(_ tool: Tool, selectedTool: Tool? = nil, onToolPress: @escaping (Tool) -> Void) {
+    init(
+        tool: Tool,
+        selectedTool: Tool? = nil,
+        onToolPress: @escaping (Tool) -> Void
+    ) {
         self.tool = tool
         self.selectedTool = selectedTool
         self.onToolPress = onToolPress
@@ -36,7 +40,6 @@ struct ToolButton: View {
         ) {
             Image("\(tool.icon.rawValue)-\(suffix)")
                 .resizable()
-                .foregroundStyle(.cyan)
         }
         .frame(width: 18, height: 18)
         .padding(.all, 4)
@@ -51,14 +54,21 @@ struct ToolButton: View {
 
 #if DEBUG
 struct ToolkitIconButton_Preview: PreviewProvider {
-    static var previews: some View {
-        ToolButton(.pencil, selectedTool: .eraser) { tool in
-            print(tool)
+    struct ToolButtonPreview: View {
+        @State private var selectedTool: Tool? = .pencil
+
+        var body: some View {
+            ToolButton(
+                tool: .pencil,
+                selectedTool: selectedTool
+            ) { tool in
+                selectedTool = selectedTool == tool ? nil : tool
+            }
         }
+    }
+
+    static var previews: some View {
+        ToolButtonPreview()
     }
 }
 #endif
-
-extension Notification.Name {
-    static let toolButton = Notification.Name("ToolButton")
-}

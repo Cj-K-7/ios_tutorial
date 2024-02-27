@@ -21,7 +21,11 @@ struct ToolSection: View {
     var body: some View {
         Section {
             ForEach(items) { item in
-                ToolButton(item.tool, selectedTool: selectedTool, onToolPress: onToolPress)
+                ToolButton(
+                    tool: item.tool,
+                    selectedTool: item.tool.toggle ? selectedTool : nil,
+                    onToolPress: onToolPress
+                )
             }
         }
     }
@@ -29,19 +33,27 @@ struct ToolSection: View {
 
 #if DEBUG
 struct ToolSection_Preview: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            ToolSection(
-                items: [
-                    ToolItem(.pencil),
-                    ToolItem(.marker),
-                    ToolItem(.eraser)
-                ],
-                selectedTool: .marker)
-            { tool in
-                print(tool)
+    struct ToolsectionPreview: View {
+        @State private var selectedTool: Tool? = .pencil
+
+        var body: some View {
+            HStack {
+                ToolSection(
+                    items: [
+                        ToolItem(.pencil),
+                        ToolItem(.marker),
+                        ToolItem(.eraser)
+                    ],
+                    selectedTool: selectedTool
+                ) { tool in
+                    selectedTool = tool
+                }
             }
         }
+    }
+
+    static var previews: some View {
+        ToolsectionPreview()
     }
 }
 #endif
