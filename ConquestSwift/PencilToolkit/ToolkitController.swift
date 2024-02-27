@@ -8,12 +8,13 @@ import SwiftUI
 import UIKit
 
 class ToolkitController: UIViewController {
+    let model = ToolkitModel()
+
     override func viewDidLoad() {
-        var model = ToolkitModel()
         let toolkitHostController = UIHostingController(
             rootView: Toolkit(
                 model: model,
-                onToolPress: { tool in model.currentTool = tool }
+                onToolPress: { tool in self.model.currentTool = tool }
             )
         )
 

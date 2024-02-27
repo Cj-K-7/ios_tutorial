@@ -49,6 +49,15 @@ enum Tool {
         case .redo: return .redo
         }
     }
+
+    var toggle: Bool {
+        switch self {
+        case .pencil: return true
+        case .marker: return true
+        case .eraser: return true
+        default: return false
+        }
+    }
 }
 
 enum ToolIcon: String {

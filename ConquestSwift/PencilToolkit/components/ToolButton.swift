@@ -24,7 +24,11 @@ struct ToolButton: View {
 
     var onToolPress: (Tool) -> Void
 
-    init(_ tool: Tool, selectedTool: Tool? = nil, onToolPress: @escaping (Tool) -> Void) {
+    init(
+        tool: Tool,
+        selectedTool: Tool? = nil,
+        onToolPress: @escaping (Tool) -> Void
+    ) {
         self.tool = tool
         self.selectedTool = selectedTool
         self.onToolPress = onToolPress
@@ -54,12 +58,11 @@ struct ToolkitIconButton_Preview: PreviewProvider {
         @State private var selectedTool: Tool? = .pencil
 
         var body: some View {
-            ToolButton(.pencil, selectedTool: selectedTool) { tool in
-                if selectedTool == tool {
-                    selectedTool = .eraser
-                } else {
-                    selectedTool = tool
-                }
+            ToolButton(
+                tool: .pencil,
+                selectedTool: selectedTool
+            ) { tool in
+                selectedTool = selectedTool == tool ? nil : tool
             }
         }
     }
