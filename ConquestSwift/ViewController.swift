@@ -8,6 +8,8 @@ import SwiftUI
 import UIKit
 
 class ViewController: UIViewController {
+    private let toolkitController = ToolkitController()
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -15,6 +17,18 @@ class ViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+}
+
+// MARK: - LifeCycle
+
+extension ViewController {
+    override func loadView() {
+        super.loadView()
+        addChild(toolkitController)
+        view.addSubview(toolkitController.view)
+
+        toolkitController.didMove(toParent: self)
     }
 
     override func viewDidLoad() {
