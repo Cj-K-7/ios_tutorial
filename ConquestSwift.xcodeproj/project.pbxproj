@@ -14,6 +14,8 @@
 		D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A51C2B882B1C00F2B93F /* Tool.swift */; };
 		D091A5222B88487B00F2B93F /* ToolSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5212B88487B00F2B93F /* ToolSection.swift */; };
 		D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5252B8848AF00F2B93F /* ToolkitController.swift */; };
+		D0C0311A2B908D3F0004D2F5 /* PDFDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C031192B908D3F0004D2F5 /* PDFDetector.swift */; };
+		D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */; };
 		D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F7082B859A5300F30BCB /* AppDelegate.swift */; };
 		D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */; };
 		D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70C2B859A5300F30BCB /* ViewController.swift */; };
@@ -52,6 +54,8 @@
 		D091A51C2B882B1C00F2B93F /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		D091A5212B88487B00F2B93F /* ToolSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSection.swift; sourceTree = "<group>"; };
 		D091A5252B8848AF00F2B93F /* ToolkitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolkitController.swift; sourceTree = "<group>"; };
+		D0C031192B908D3F0004D2F5 /* PDFDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDetector.swift; sourceTree = "<group>"; };
+		D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = pdfDetector.mlpackage; sourceTree = "<group>"; };
 		D0F4F7052B859A5300F30BCB /* ConquestSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConquestSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F4F7082B859A5300F30BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +152,15 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		D0C031182B908D2C0004D2F5 /* ObjectDetection */ = {
+			isa = PBXGroup;
+			children = (
+				D0C031192B908D3F0004D2F5 /* PDFDetector.swift */,
+				D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */,
+			);
+			path = ObjectDetection;
+			sourceTree = "<group>";
+		};
 		D0F4F6FC2B859A5200F30BCB = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +186,7 @@
 		D0F4F7072B859A5300F30BCB /* ConquestSwift */ = {
 			isa = PBXGroup;
 			children = (
+				D0C031182B908D2C0004D2F5 /* ObjectDetection */,
 				D075FBF12B870F810021EF21 /* Pagination */,
 				D091A5172B88216200F2B93F /* PencilToolkit */,
 				D0F4F7082B859A5300F30BCB /* AppDelegate.swift */,
@@ -358,6 +372,8 @@
 				D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */,
 				D091A5192B88218600F2B93F /* Toolkit.swift in Sources */,
 				D0FAE7712B8C26F900340E07 /* ToolkitModel.swift in Sources */,
+				D0C0311A2B908D3F0004D2F5 /* PDFDetector.swift in Sources */,
+				D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */,
 				D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */,
 				D091A5222B88487B00F2B93F /* ToolSection.swift in Sources */,
 				D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */,
