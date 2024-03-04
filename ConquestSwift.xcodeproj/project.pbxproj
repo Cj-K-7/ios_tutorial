@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0682BCC2B9566030097887D /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */; };
+		D0682BCD2B9566030097887D /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */; };
+		D0682BD02B9566320097887D /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */; };
+		D0682BD12B9566320097887D /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */; };
 		D075FBF02B86F69B0021EF21 /* PageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075FBEF2B86F69B0021EF21 /* PageListView.swift */; };
 		D075FBF42B870F960021EF21 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075FBF32B870F960021EF21 /* PageViewController.swift */; };
 		D0889A6E2B90A051003E669C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A6D2B90A051003E669C /* CameraViewController.swift */; };
-		D0889A732B90C7F3003E669C /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0889A722B90C7F3003E669C /* YOLOv3TinyInt8LUT.mlmodel */; };
+		D0889A732B90C7F3003E669C /* YOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0889A722B90C7F3003E669C /* YOLO.mlmodel */; };
 		D0889A762B9173C0003E669C /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A752B9173C0003E669C /* GalleryController.swift */; };
 		D0889A792B917465003E669C /* GalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A782B917465003E669C /* GalleryModel.swift */; };
 		D0889A7B2B91747B003E669C /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7A2B91747B003E669C /* Gallery.swift */; };
 		D0889A7E2B917523003E669C /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7D2B917523003E669C /* ImageItem.swift */; };
 		D0889A802B917C7E003E669C /* ImageGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */; };
-		D0889A832B917F94003E669C /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A822B917F94003E669C /* ImageGridView.swift */; };
 		D091A5192B88218600F2B93F /* Toolkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5182B88218600F2B93F /* Toolkit.swift */; };
 		D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A51A2B88290600F2B93F /* ToolButton.swift */; };
 		D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A51C2B882B1C00F2B93F /* Tool.swift */; };
@@ -55,16 +58,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+RawBytes.swift"; sourceTree = "<group>"; };
+		D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RawBytes.swift"; sourceTree = "<group>"; };
+		D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Helpers.swift"; sourceTree = "<group>"; };
+		D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		D075FBEF2B86F69B0021EF21 /* PageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageListView.swift; sourceTree = "<group>"; };
 		D075FBF32B870F960021EF21 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		D0889A6D2B90A051003E669C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		D0889A722B90C7F3003E669C /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
+		D0889A722B90C7F3003E669C /* YOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLO.mlmodel; sourceTree = "<group>"; };
 		D0889A752B9173C0003E669C /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 		D0889A782B917465003E669C /* GalleryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
 		D0889A7A2B91747B003E669C /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		D0889A7D2B917523003E669C /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 		D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridItemView.swift; sourceTree = "<group>"; };
-		D0889A822B917F94003E669C /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		D091A5182B88218600F2B93F /* Toolkit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolkit.swift; sourceTree = "<group>"; };
 		D091A51A2B88290600F2B93F /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		D091A51C2B882B1C00F2B93F /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
@@ -114,6 +120,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0682BC92B9565D40097887D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */,
+				D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */,
+				D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */,
+				D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D075FBEE2B86F6850021EF21 /* PageListVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,9 +159,10 @@
 		D0889A6F2B90A066003E669C /* PDFDetector */ = {
 			isa = PBXGroup;
 			children = (
+				D0682BC92B9565D40097887D /* Extensions */,
 				D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */,
 				D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */,
-				D0889A722B90C7F3003E669C /* YOLOv3TinyInt8LUT.mlmodel */,
+				D0889A722B90C7F3003E669C /* YOLO.mlmodel */,
 			);
 			path = PDFDetector;
 			sourceTree = "<group>";
@@ -180,7 +198,6 @@
 		D0889A812B917F87003E669C /* grid */ = {
 			isa = PBXGroup;
 			children = (
-				D0889A822B917F94003E669C /* ImageGridView.swift */,
 				D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */,
 			);
 			path = grid;
@@ -252,9 +269,9 @@
 				D0C031182B908D2C0004D2F5 /* ObjectDetection */,
 				D075FBF12B870F810021EF21 /* Pagination */,
 				D091A5172B88216200F2B93F /* PencilToolkit */,
-				D0F4F7082B859A5300F30BCB /* AppDelegate.swift */,
 				D0889A742B9173AC003E669C /* Gallery */,
 				D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */,
+				D0F4F7082B859A5300F30BCB /* AppDelegate.swift */,
 				D0F4F70C2B859A5300F30BCB /* ViewController.swift */,
 				D0F4F70E2B859A5300F30BCB /* Main.storyboard */,
 				D0F4F7112B859A5400F30BCB /* Assets.xcassets */,
@@ -428,11 +445,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0889A802B917C7E003E669C /* ImageGridItemView.swift in Sources */,
-				D0889A732B90C7F3003E669C /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
+				D0889A732B90C7F3003E669C /* YOLO.mlmodel in Sources */,
 				D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */,
 				D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */,
 				D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */,
 				D0889A7E2B917523003E669C /* ImageItem.swift in Sources */,
+				D0682BCD2B9566030097887D /* UIImage+RawBytes.swift in Sources */,
 				D0F4F7562B85A73300F30BCB /* Color.swift in Sources */,
 				D0889A762B9173C0003E669C /* GalleryController.swift in Sources */,
 				D075FBF02B86F69B0021EF21 /* PageListView.swift in Sources */,
@@ -445,9 +463,11 @@
 				D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */,
 				D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */,
 				D0889A7B2B91747B003E669C /* Gallery.swift in Sources */,
-				D0889A832B917F94003E669C /* ImageGridView.swift in Sources */,
 				D091A5222B88487B00F2B93F /* ToolSection.swift in Sources */,
+				D0682BD12B9566320097887D /* MLMultiArray+Image.swift in Sources */,
+				D0682BCC2B9566030097887D /* CGImage+RawBytes.swift in Sources */,
 				D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */,
+				D0682BD02B9566320097887D /* MLMultiArray+Helpers.swift in Sources */,
 				D0889A6E2B90A051003E669C /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

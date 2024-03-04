@@ -11,6 +11,8 @@ import UIKit
 import Vision
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+    private let MODEL_INPUT_SIZE = 640
+
     private var previewLayer = AVCaptureVideoPreviewLayer()
     private var videoOutput = AVCaptureVideoDataOutput()
     private let session = AVCaptureSession()
@@ -25,7 +27,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        updateViewScreen()
+        AppUtility.lockOrientation(.portrait)
 
         sessionQueue.async {
             self.setupCameraSession()
@@ -35,47 +37,28 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
     }
 
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        updateViewScreen()
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         sessionQueue.sync {
             session.stopRunning()
         }
+        AppUtility.unlockOrientation()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        removeDetector()
     }
 }
 
 // MARK: SCREEN UI HANDLING
 
 extension CameraViewController {
-    private func updateViewScreen() {
-        screenBounds = UIScreen.main.bounds
-        previewLayer.frame = CGRect(x: 0, y: 0, width: screenBounds.size.width, height: screenBounds.size.height)
-
-        switch UIDevice.current.orientation {
-        case .portraitUpsideDown:
-            previewLayer.connection?.videoOrientation = .portraitUpsideDown
-
-        case .landscapeLeft:
-            previewLayer.connection?.videoOrientation = .landscapeRight
-
-        case .landscapeRight:
-            previewLayer.connection?.videoOrientation = .landscapeLeft
-
-        case .portrait:
-            previewLayer.connection?.videoOrientation = .portrait
-
-        default:
-            break
-        }
-        updateDetector()
-    }
-
     private func setupDetector() {
         objectDetector.loadML()
         objectDetector.layer.frame = CGRect(x: 0, y: 0, width: screenBounds.size.width, height: screenBounds.size.height)
-        view.layer.addSublayer(objectDetector.layer)
+        DispatchQueue.main.async {
+            self.view.layer.addSublayer(self.objectDetector.layer)
+        }
+        print("Detector added")
     }
 
     private func updateDetector() {
@@ -85,20 +68,25 @@ extension CameraViewController {
     private func removeDetector() {
         objectDetector.unloadML()
         objectDetector.layer.removeFromSuperlayer()
+        print("Detector removed")
     }
 
     // Delegate of VideoOutput
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-        let context = CIContext(options: nil)
-        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return }
-
-        let cropRect = CGRect(x: 0, y: 0, width: 640, height: 640)
-
-        guard let croppedCGImage = cgImage.cropping(to: cropRect) else { return }
-
-        let imageRequestHandler = VNImageRequestHandler(cgImage: croppedCGImage, options: [:])
+//        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+//        let context = CIContext(options: nil)
+//
+//        let scaleX = CGFloat(MODEL_INPUT_SIZE) / CGFloat(CVPixelBufferGetWidth(pixelBuffer))
+//        let scaleY = CGFloat(MODEL_INPUT_SIZE) / CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+//        let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+//
+//        let scaledCIImage = ciImage.transformed(by: transform)
+//
+//        guard let cgImage = context.createCGImage(scaledCIImage, from: scaledCIImage.extent) else { return }
+//
+//        let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
 
         do {
             try imageRequestHandler.perform(objectDetector.requests) // Schedules vision requests to be performed

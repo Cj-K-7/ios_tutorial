@@ -31,12 +31,7 @@ extension ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        button.setTitle("Camera", for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
-        button.backgroundColor = .red
-        view.addSubview(button)
+        addChildController(cameraController)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -58,11 +53,6 @@ extension ViewController {
         controller.willMove(toParent: nil)
         controller.view.removeFromSuperview()
         controller.removeFromParent()
-    }
-
-    @objc private func buttonTapped() {
-        print("buttonTapped")
-        present(cameraController, animated: true, completion: nil)
     }
 }
 
