@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     private let toolkitController = ToolkitController()
+    private let cameraController = CameraViewController()
+    private let button = UIButton()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -25,19 +27,32 @@ class ViewController: UIViewController {
 extension ViewController {
     override func loadView() {
         super.loadView()
-        addChild(toolkitController)
-        view.addSubview(toolkitController.view)
-
-        toolkitController.didMove(toParent: self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addChildController(cameraController)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Do any additional setup after loading the view.
+    }
+}
+
+// MARK: - Sub handling
+
+extension ViewController {
+    private func addChildController(_ controller: UIViewController) {
+        addChild(controller)
+        view.addSubview(controller.view)
+        controller.didMove(toParent: self)
+    }
+
+    private func removeChildController(_ controller: UIViewController) {
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
     }
 }
 

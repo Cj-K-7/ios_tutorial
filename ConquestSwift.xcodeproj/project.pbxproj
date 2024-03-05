@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0682BCC2B9566030097887D /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */; };
+		D0682BCD2B9566030097887D /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */; };
+		D0682BD02B9566320097887D /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */; };
+		D0682BD12B9566320097887D /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */; };
 		D075FBF02B86F69B0021EF21 /* PageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075FBEF2B86F69B0021EF21 /* PageListView.swift */; };
 		D075FBF42B870F960021EF21 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075FBF32B870F960021EF21 /* PageViewController.swift */; };
+		D0889A6E2B90A051003E669C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A6D2B90A051003E669C /* CameraViewController.swift */; };
+		D0889A732B90C7F3003E669C /* YOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0889A722B90C7F3003E669C /* YOLO.mlmodel */; };
+		D0889A762B9173C0003E669C /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A752B9173C0003E669C /* GalleryController.swift */; };
+		D0889A792B917465003E669C /* GalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A782B917465003E669C /* GalleryModel.swift */; };
+		D0889A7B2B91747B003E669C /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7A2B91747B003E669C /* Gallery.swift */; };
+		D0889A7E2B917523003E669C /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7D2B917523003E669C /* ImageItem.swift */; };
+		D0889A802B917C7E003E669C /* ImageGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */; };
 		D091A5192B88218600F2B93F /* Toolkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5182B88218600F2B93F /* Toolkit.swift */; };
 		D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A51A2B88290600F2B93F /* ToolButton.swift */; };
 		D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A51C2B882B1C00F2B93F /* Tool.swift */; };
 		D091A5222B88487B00F2B93F /* ToolSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5212B88487B00F2B93F /* ToolSection.swift */; };
 		D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5252B8848AF00F2B93F /* ToolkitController.swift */; };
+		D0C0311A2B908D3F0004D2F5 /* ObjectDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */; };
+		D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */; };
+		D0F1589A2B96E7A100EC3FB4 /* test.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0F158992B96E7A100EC3FB4 /* test.mlmodel */; };
 		D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F7082B859A5300F30BCB /* AppDelegate.swift */; };
 		D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */; };
 		D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70C2B859A5300F30BCB /* ViewController.swift */; };
@@ -45,13 +59,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+RawBytes.swift"; sourceTree = "<group>"; };
+		D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RawBytes.swift"; sourceTree = "<group>"; };
+		D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Helpers.swift"; sourceTree = "<group>"; };
+		D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		D075FBEF2B86F69B0021EF21 /* PageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageListView.swift; sourceTree = "<group>"; };
 		D075FBF32B870F960021EF21 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		D0889A6D2B90A051003E669C /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		D0889A722B90C7F3003E669C /* YOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLO.mlmodel; sourceTree = "<group>"; };
+		D0889A752B9173C0003E669C /* GalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
+		D0889A782B917465003E669C /* GalleryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
+		D0889A7A2B91747B003E669C /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
+		D0889A7D2B917523003E669C /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
+		D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridItemView.swift; sourceTree = "<group>"; };
 		D091A5182B88218600F2B93F /* Toolkit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolkit.swift; sourceTree = "<group>"; };
 		D091A51A2B88290600F2B93F /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		D091A51C2B882B1C00F2B93F /* Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		D091A5212B88487B00F2B93F /* ToolSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSection.swift; sourceTree = "<group>"; };
 		D091A5252B8848AF00F2B93F /* ToolkitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolkitController.swift; sourceTree = "<group>"; };
+		D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetector.swift; sourceTree = "<group>"; };
+		D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = pdfDetector.mlpackage; sourceTree = "<group>"; };
+		D0F158992B96E7A100EC3FB4 /* test.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = test.mlmodel; sourceTree = "<group>"; };
 		D0F4F7052B859A5300F30BCB /* ConquestSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConquestSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F4F7082B859A5300F30BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +122,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0682BC92B9565D40097887D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0682BCE2B9566320097887D /* MLMultiArray+Helpers.swift */,
+				D0682BCF2B9566320097887D /* MLMultiArray+Image.swift */,
+				D0682BCA2B9566030097887D /* CGImage+RawBytes.swift */,
+				D0682BCB2B9566030097887D /* UIImage+RawBytes.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D075FBEE2B86F6850021EF21 /* PageListVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,10 +158,58 @@
 			path = PageView;
 			sourceTree = "<group>";
 		};
+		D0889A6F2B90A066003E669C /* PDFDetector */ = {
+			isa = PBXGroup;
+			children = (
+				D0682BC92B9565D40097887D /* Extensions */,
+				D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */,
+				D0F158992B96E7A100EC3FB4 /* test.mlmodel */,
+				D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */,
+				D0889A722B90C7F3003E669C /* YOLO.mlmodel */,
+			);
+			path = PDFDetector;
+			sourceTree = "<group>";
+		};
+		D0889A742B9173AC003E669C /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D0889A7C2B917516003E669C /* item */,
+				D0889A772B917439003E669C /* components */,
+				D0889A7A2B91747B003E669C /* Gallery.swift */,
+				D0889A782B917465003E669C /* GalleryModel.swift */,
+				D0889A752B9173C0003E669C /* GalleryController.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		D0889A772B917439003E669C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				D0889A812B917F87003E669C /* grid */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		D0889A7C2B917516003E669C /* item */ = {
+			isa = PBXGroup;
+			children = (
+				D0889A7D2B917523003E669C /* ImageItem.swift */,
+			);
+			path = item;
+			sourceTree = "<group>";
+		};
+		D0889A812B917F87003E669C /* grid */ = {
+			isa = PBXGroup;
+			children = (
+				D0889A7F2B917C7E003E669C /* ImageGridItemView.swift */,
+			);
+			path = grid;
+			sourceTree = "<group>";
+		};
 		D091A5172B88216200F2B93F /* PencilToolkit */ = {
 			isa = PBXGroup;
 			children = (
-				D091A5202B88485100F2B93F /* util */,
+				D091A5202B88485100F2B93F /* item */,
 				D091A51E2B88328500F2B93F /* components */,
 				D091A5182B88218600F2B93F /* Toolkit.swift */,
 				D0FAE7702B8C26F900340E07 /* ToolkitModel.swift */,
@@ -140,12 +227,21 @@
 			path = components;
 			sourceTree = "<group>";
 		};
-		D091A5202B88485100F2B93F /* util */ = {
+		D091A5202B88485100F2B93F /* item */ = {
 			isa = PBXGroup;
 			children = (
 				D091A51C2B882B1C00F2B93F /* Tool.swift */,
 			);
-			path = util;
+			path = item;
+			sourceTree = "<group>";
+		};
+		D0C031182B908D2C0004D2F5 /* ObjectDetection */ = {
+			isa = PBXGroup;
+			children = (
+				D0889A6F2B90A066003E669C /* PDFDetector */,
+				D0889A6D2B90A051003E669C /* CameraViewController.swift */,
+			);
+			path = ObjectDetection;
 			sourceTree = "<group>";
 		};
 		D0F4F6FC2B859A5200F30BCB = {
@@ -173,10 +269,12 @@
 		D0F4F7072B859A5300F30BCB /* ConquestSwift */ = {
 			isa = PBXGroup;
 			children = (
+				D0C031182B908D2C0004D2F5 /* ObjectDetection */,
 				D075FBF12B870F810021EF21 /* Pagination */,
 				D091A5172B88216200F2B93F /* PencilToolkit */,
-				D0F4F7082B859A5300F30BCB /* AppDelegate.swift */,
+				D0889A742B9173AC003E669C /* Gallery */,
 				D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */,
+				D0F4F7082B859A5300F30BCB /* AppDelegate.swift */,
 				D0F4F70C2B859A5300F30BCB /* ViewController.swift */,
 				D0F4F70E2B859A5300F30BCB /* Main.storyboard */,
 				D0F4F7112B859A5400F30BCB /* Assets.xcassets */,
@@ -349,18 +447,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0889A802B917C7E003E669C /* ImageGridItemView.swift in Sources */,
+				D0889A732B90C7F3003E669C /* YOLO.mlmodel in Sources */,
 				D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */,
 				D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */,
 				D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */,
+				D0889A7E2B917523003E669C /* ImageItem.swift in Sources */,
+				D0682BCD2B9566030097887D /* UIImage+RawBytes.swift in Sources */,
 				D0F4F7562B85A73300F30BCB /* Color.swift in Sources */,
+				D0889A762B9173C0003E669C /* GalleryController.swift in Sources */,
 				D075FBF02B86F69B0021EF21 /* PageListView.swift in Sources */,
 				D075FBF42B870F960021EF21 /* PageViewController.swift in Sources */,
 				D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */,
 				D091A5192B88218600F2B93F /* Toolkit.swift in Sources */,
+				D0889A792B917465003E669C /* GalleryModel.swift in Sources */,
 				D0FAE7712B8C26F900340E07 /* ToolkitModel.swift in Sources */,
+				D0C0311A2B908D3F0004D2F5 /* ObjectDetector.swift in Sources */,
+				D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */,
 				D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */,
+				D0889A7B2B91747B003E669C /* Gallery.swift in Sources */,
 				D091A5222B88487B00F2B93F /* ToolSection.swift in Sources */,
+				D0682BD12B9566320097887D /* MLMultiArray+Image.swift in Sources */,
+				D0682BCC2B9566030097887D /* CGImage+RawBytes.swift in Sources */,
 				D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */,
+				D0682BD02B9566320097887D /* MLMultiArray+Helpers.swift in Sources */,
+				D0F1589A2B96E7A100EC3FB4 /* test.mlmodel in Sources */,
+				D0889A6E2B90A051003E669C /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
