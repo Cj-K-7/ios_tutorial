@@ -22,6 +22,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
 
     private var objectDetector = ObjectDetector()
     private var frameCounter = 0
+    private var mlRequsetPerFPS = 5
 
     override func viewDidLoad() {
         checkPermission()
@@ -62,10 +63,6 @@ extension CameraViewController {
         print("Detector added")
     }
 
-    private func updateDetector() {
-        objectDetector.layer.frame = CGRect(x: 0, y: 0, width: screenBounds.size.width, height: screenBounds.size.height)
-    }
-
     private func removeDetector() {
         objectDetector.unloadML()
         objectDetector.layer.removeFromSuperlayer()
@@ -76,7 +73,7 @@ extension CameraViewController {
     // Delegate of VideoOutput
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         frameCounter += 1
-        guard frameCounter % 10 == 0 else { return }
+        guard frameCounter % mlRequsetPerFPS == 0 else { return }
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
 
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])

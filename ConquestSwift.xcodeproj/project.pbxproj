@@ -27,6 +27,7 @@
 		D091A5262B8848AF00F2B93F /* ToolkitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A5252B8848AF00F2B93F /* ToolkitController.swift */; };
 		D0C0311A2B908D3F0004D2F5 /* ObjectDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */; };
 		D0C0311C2B908E030004D2F5 /* pdfDetector.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */; };
+		D0F1589A2B96E7A100EC3FB4 /* test.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D0F158992B96E7A100EC3FB4 /* test.mlmodel */; };
 		D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F7082B859A5300F30BCB /* AppDelegate.swift */; };
 		D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */; };
 		D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70C2B859A5300F30BCB /* ViewController.swift */; };
@@ -78,6 +79,7 @@
 		D091A5252B8848AF00F2B93F /* ToolkitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolkitController.swift; sourceTree = "<group>"; };
 		D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetector.swift; sourceTree = "<group>"; };
 		D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = pdfDetector.mlpackage; sourceTree = "<group>"; };
+		D0F158992B96E7A100EC3FB4 /* test.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = test.mlmodel; sourceTree = "<group>"; };
 		D0F4F7052B859A5300F30BCB /* ConquestSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConquestSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F4F7082B859A5300F30BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				D0682BC92B9565D40097887D /* Extensions */,
 				D0C031192B908D3F0004D2F5 /* ObjectDetector.swift */,
+				D0F158992B96E7A100EC3FB4 /* test.mlmodel */,
 				D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */,
 				D0889A722B90C7F3003E669C /* YOLO.mlmodel */,
 			);
@@ -468,6 +471,7 @@
 				D0682BCC2B9566030097887D /* CGImage+RawBytes.swift in Sources */,
 				D091A51B2B88290600F2B93F /* ToolButton.swift in Sources */,
 				D0682BD02B9566320097887D /* MLMultiArray+Helpers.swift in Sources */,
+				D0F1589A2B96E7A100EC3FB4 /* test.mlmodel in Sources */,
 				D0889A6E2B90A051003E669C /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
