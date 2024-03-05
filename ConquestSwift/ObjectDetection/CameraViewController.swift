@@ -21,6 +21,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private var screenBounds: CGRect!
 
     private var objectDetector = ObjectDetector()
+    private var frameCounter = 0
 
     override func viewDidLoad() {
         checkPermission()
@@ -68,24 +69,16 @@ extension CameraViewController {
     private func removeDetector() {
         objectDetector.unloadML()
         objectDetector.layer.removeFromSuperlayer()
+        frameCounter = 0
         print("Detector removed")
     }
 
     // Delegate of VideoOutput
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        frameCounter += 1
+        guard frameCounter % 10 == 0 else { return }
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-//        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-//        let context = CIContext(options: nil)
-//
-//        let scaleX = CGFloat(MODEL_INPUT_SIZE) / CGFloat(CVPixelBufferGetWidth(pixelBuffer))
-//        let scaleY = CGFloat(MODEL_INPUT_SIZE) / CGFloat(CVPixelBufferGetHeight(pixelBuffer))
-//        let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-//
-//        let scaledCIImage = ciImage.transformed(by: transform)
-//
-//        guard let cgImage = context.createCGImage(scaledCIImage, from: scaledCIImage.extent) else { return }
-//
-//        let imageRequestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:])
 
         do {

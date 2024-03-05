@@ -10,6 +10,8 @@ import UIKit
 import Vision
 
 class ObjectDetector {
+    private let threshold = 0.7
+
     var requests = [VNRequest]()
     var layer: CALayer
 
@@ -54,111 +56,132 @@ class ObjectDetector {
                 let featureValue = observation.featureValue
                 guard let multiArray = featureValue.multiArrayValue else { return }
 
-//                guard let image = createImage(from: multiArray) else { return }
+                let outputHeight = multiArray.shape[2].intValue
+                let outputWidth = multiArray.shape[3].intValue
 
-                let height = multiArray.shape[2].intValue
-                let width = multiArray.shape[3].intValue
+                var points: [[CGPoint]] = Array(repeating: Array(repeating: .zero, count: outputWidth), count: outputHeight)
 
-                var points: [[CGPoint]] = Array(repeating: Array(repeating: CGPoint(x: 0, y: 0), count: height), count: width)
-
-                for y in 0..<height {
-                    for x in 0..<width {
+                for y in 0..<outputHeight {
+                    for x in 0..<outputWidth {
                         let value = multiArray[[0, 0, y, x] as [NSNumber]].doubleValue
-                        let detected = value > 0.2
+                        let detected = value > threshold
 
-                        let target = CGPoint(x: Int(x * Int(layer.frame.width) / width), y: Int(y * Int(layer.frame.height) / height))
+                        let target = CGPoint(x: Int(x * Int(layer.frame.width) / outputWidth), y: Int(y * Int(layer.frame.height) / outputHeight))
 
                         if detected {
-                            points[y].append(target)
+                            points[y][x] = target
                         }
                     }
                 }
 
                 let borderPoints = getBorderPoints(points: points)
 
+                // If the border is not a rectangle, return nil
                 if borderPoints.count < 3 {
                     return
                 }
 
-                let path = UIBezierPath()
-                path.move(to: borderPoints[0])
-                for i in 1..<borderPoints.count {
-                    path.addLine(to: borderPoints[i])
-                }
-                path.close()
-
-                let shapeLayer = CAShapeLayer()
-                shapeLayer.path = path.cgPath
-                shapeLayer.fillColor = UIColor.clear.cgColor
-                shapeLayer.strokeColor = UIColor.red.cgColor
-//                shapeLayer.contents = image.cgImage
-//                shapeLayer.frame = layer.bounds
+                let equalizedPoints = equalizePoints(points: borderPoints)
+                let minimizedPoints = minimizePoints(points: equalizedPoints)
+                let shapeLayer = drawLayer(drawingPoints: minimizedPoints)
 
                 layer.addSublayer(shapeLayer)
             }
         }
     }
 
-    private
-    func createImage(from mlMultiArray: MLMultiArray) -> CIImage? {
-        guard mlMultiArray.shape.count >= 2 else {
-            print("The input MLMultiArray should have at least 2 dimensions")
-            return nil
+    private func getBorderPoints(points: [[CGPoint]]) -> [CGPoint] {
+        var topRow = [CGPoint]()
+        var rightColumn = [CGPoint]()
+        var bottomRow = [CGPoint]()
+        var leftColumn = [CGPoint]()
+        var borderPoints: [CGPoint] = []
+
+        let nonZeroCallback = { (point: CGPoint) -> Bool in
+            point != .zero
         }
 
-        let height = mlMultiArray.shape[2].intValue
-        let width = mlMultiArray.shape[3].intValue
+        // Top row
+        topRow = points[0].filter(nonZeroCallback)
 
-        var pixelValues = [UInt8](repeating: 0, count: width * height * 4)
+        // Right column
+        for i in 1..<points.count - 1 {
+            guard let rightPoint = points[i].filter(nonZeroCallback).last else { continue }
+            rightColumn.append(rightPoint)
+        }
 
-        for y in 0..<height {
-            for x in 0..<width {
-                let value = mlMultiArray[[0, 0, y, x] as [NSNumber]].doubleValue
-                let detected = value > 0.3
-                let index = (y * width + x) * 4
-                pixelValues[index] = 160 // Red
-                pixelValues[index + 1] = 200 // Green
-                pixelValues[index + 2] = 255 // Blue
-                pixelValues[index + 3] = detected ? 100 : 0 // Alpha
+        // Bottom row
+        if let bottomPoints = points.last {
+            bottomRow = bottomPoints.filter(nonZeroCallback).reversed()
+        }
+
+        // Left column
+        for i in stride(from: points.count - 2, through: 1, by: -1) {
+            guard let leftPoint = points[i].filter(nonZeroCallback).first else { continue }
+            leftColumn.append(leftPoint)
+        }
+
+        borderPoints = [topRow, rightColumn, bottomRow, leftColumn].flatMap { $0 }
+
+        print("borderPoints: \(borderPoints)")
+
+        return borderPoints
+    }
+
+    private func equalizePoints(points: [CGPoint]) -> [CGPoint] {
+        let threshold: CGFloat = 4.0 // Define your threshold for "too different"
+
+        var equalizedPoints = points
+        var removeTargetIndices: [Int] = []
+
+        for i in 0..<points.count - 1 {
+            let currentPoint = points[i]
+            let nextPoint = points[i + 1]
+
+            let xDifference = abs(currentPoint.x - nextPoint.x)
+            let yDifference = abs(currentPoint.y - nextPoint.y)
+
+            if xDifference > threshold || yDifference > threshold {
+                removeTargetIndices.append(i)
             }
         }
 
-        let cfbuffer = CFDataCreate(nil, &pixelValues, pixelValues.count)
-        let dataProvider = CGDataProvider(data: cfbuffer!)
-        let cgImage = CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.last.rawValue), provider: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
+        equalizedPoints = equalizedPoints.enumerated().filter { !removeTargetIndices.contains($0.offset) }.map { $0.element }
 
-        return CIImage(cgImage: cgImage!)
+        return equalizedPoints
     }
 
-    private func blendImage(_ image: CIImage, withMask mask: CIImage, onBackground background: CIImage) -> CIImage {
-        let blendFilter = CIFilter(name: "CIBlendWithMask")!
-        blendFilter.setValue(image, forKey: kCIInputImageKey)
-        blendFilter.setValue(background, forKey: kCIInputBackgroundImageKey)
-        blendFilter.setValue(mask, forKey: kCIInputMaskImageKey)
-        return blendFilter.outputImage!
-    }
-}
+    private func minimizePoints(points: [CGPoint]) -> [CGPoint] {
+        let minimumDistance: CGFloat = 10.0 // Define your minimum distance
 
-func getBorderPoints(points: [[CGPoint]]) -> [CGPoint] {
-    var borderPoints: [CGPoint] = []
+        var filteredPoints: [CGPoint] = [points.first!]
 
-    // Top row
-    borderPoints += points[0]
+        for point in points.dropFirst() {
+            let lastPoint = filteredPoints.last!
+            let distance = hypot(point.x - lastPoint.x, point.y - lastPoint.y)
 
-    // Right column
-    for i in 1..<points.count - 1 {
-        borderPoints.append(points[i].last!)
+            if distance >= minimumDistance {
+                filteredPoints.append(point)
+            }
+        }
+
+        return filteredPoints
     }
 
-    // Bottom row
-    if let bottomRow = points.last {
-        borderPoints += bottomRow.reversed()
-    }
+    private func drawLayer(drawingPoints: [CGPoint]) -> CAShapeLayer {
+        let shapeLayer = CAShapeLayer()
 
-    // Left column
-    for i in stride(from: points.count - 2, through: 1, by: -1) {
-        borderPoints.append(points[i].first!)
-    }
+        let path = UIBezierPath()
+        path.move(to: drawingPoints[0])
+        for i in 1..<drawingPoints.count {
+            path.addLine(to: drawingPoints[i])
+        }
+        path.close()
 
-    return borderPoints
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = UIColor.blue.withAlphaComponent(0.2).cgColor
+        shapeLayer.strokeColor = UIColor.blue.cgColor
+
+        return shapeLayer
+    }
 }
