@@ -8,27 +8,49 @@
 import Foundation
 
 class GalleryModel: ObservableObject {
-    @Published var items: [ImageItem] = []
+    @Published var items: [GalleryImageItem] = [
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+        GalleryImageItem(url: URL(string: "https://picsum.photos/200/200")),
+    ]
 
     init() {
         if let urls = Bundle.main.urls(forResourcesWithExtension: "jpg", subdirectory: nil) {
             for url in urls {
-                let item = ImageItem(url: url)
+                let item = GalleryImageItem(url: url)
                 items.append(item)
             }
         }
     }
 
     /// Adds an item to the data collection.
-    func addItem(_ item: ImageItem) {
+    func addItem(_ item: GalleryImageItem) {
         items.insert(item, at: 0)
     }
 
+    func addItems(_ items: [GalleryImageItem]) {
+        self.items.insert(contentsOf: items, at: 0)
+    }
+
     /// Removes an item from the data collection.
-    func removeItem(_ item: ImageItem) {
+    func removeItem(_ item: GalleryImageItem) {
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
         }
+    }
+
+    /// Removes all items from the data collection.
+    func removeAll() {
+        items.removeAll()
     }
 }
 
