@@ -10,7 +10,10 @@ import UIKit
 import Vision
 
 class ObjectDetector {
-    private let threshold = 0.456
+    private let threshold: Float = 0.3
+    private let boundsOffsetX: CGFloat = 10.0
+    private let boundsOffsetY: CGFloat = 16.0
+    private let minimalPointCount = 20
 
     var requests = [VNRequest]()
     var layer: CALayer
@@ -49,33 +52,87 @@ class ObjectDetector {
 
     private func onDetectedConditionFullfilled(_ results: [VNObservation]) {
         layer.sublayers = nil
-        if #available(iOS 14.0, *) {
-            guard let observation = results.first else { return }
 
-            if observation is VNCoreMLFeatureValueObservation {
-                guard let observation = observation as? VNCoreMLFeatureValueObservation else { return }
+        guard let detectedScores = results.first else { return }
+        guard let detectedBoundaries = results.last else { return }
 
-                let featureValue = observation.featureValue
-                guard let multiArray = featureValue.multiArrayValue else { return }
+        var scopeBounds: CGRect = .zero
+        var bestMarkValue: Float = 0.0
+        var bestMarkIndex = 0
 
-                let pointsDeimension = getPointsDimension(multiArray)
-                let borderPoints = getBorderPoints(pointsDeimension)
+        if detectedBoundaries is VNCoreMLFeatureValueObservation {
+            guard let output = detectedBoundaries as? VNCoreMLFeatureValueObservation else { return }
+            guard let multiArray = output.featureValue.multiArrayValue else { return }
 
-                // at least, 4 points are needed to draw a shape
-                if borderPoints.count < 3 {
-                    return
+            // (Float32 1 × 37 × 8400)
+            let channelCount = multiArray.shape[1].intValue
+            let dimensionCount = multiArray.shape[2].intValue
+
+            // find max probability
+            var maxProbability: Float = 0.0
+            var maxProbabilityIndex = 0
+            for j in 0 ... dimensionCount - 2 {
+                let currentProbability = multiArray[[0, 4, j] as [NSNumber]].floatValue
+                let nextProbability = multiArray[[0, 4, j + 1] as [NSNumber]].floatValue
+                let isNextBigger = nextProbability > currentProbability
+                let isNextMax = nextProbability > maxProbability
+                if isNextBigger {
+                    if isNextMax {
+                        maxProbabilityIndex = j + 1
+                        maxProbability = nextProbability
+                        // 0 = xCenter , 1 = yCenter, 2 = height, 3 = width
+                        let outputXC = multiArray[[0, 0, maxProbabilityIndex] as [NSNumber]].floatValue
+                        let outputYC = multiArray[[0, 1, maxProbabilityIndex] as [NSNumber]].floatValue
+                        let outputWidth = multiArray[[0, 2, maxProbabilityIndex] as [NSNumber]].floatValue
+                        let outputHeight = multiArray[[0, 3, maxProbabilityIndex] as [NSNumber]].floatValue
+
+                        let x = CGFloat(outputXC) * (160 / layer.bounds.width) - boundsOffsetX
+                        let y = CGFloat(outputYC) - boundsOffsetY
+                        let width = CGFloat(outputWidth)
+                        let height = CGFloat(outputHeight)
+
+                        scopeBounds = CGRect(x: x, y: y, width: height, height: width)
+                    }
+                    print("maxProbabilityIndex: \(maxProbabilityIndex)")
                 }
-
-                let equalizedPoints = equalizePoints(borderPoints)
-                let shapeLayer = drawLayer(equalizedPoints)
-
-                layer.addSublayer(shapeLayer)
             }
+
+            for i in 5 ... channelCount - 1 {
+                let curentChannelProbability = multiArray[[0, i, maxProbabilityIndex] as [NSNumber]].floatValue
+                if curentChannelProbability > bestMarkValue {
+                    bestMarkValue = curentChannelProbability
+                    bestMarkIndex = i - 5
+                }
+            }
+
+            let boxLayer = CALayer()
+            boxLayer.frame = scopeBounds
+            boxLayer.borderWidth = 1
+            boxLayer.borderColor = UIColor.white.cgColor
+            layer.addSublayer(boxLayer)
+        }
+
+        if detectedScores is VNCoreMLFeatureValueObservation {
+            guard let output = detectedScores as? VNCoreMLFeatureValueObservation else { return }
+            guard let multiArray = output.featureValue.multiArrayValue else { return }
+            // (Float32 1 × 32 × 160 × 160)
+
+            let pointsDeimension = getPointsDimension(multiArray, bestMarkIndex, scopeBounds)
+            let borderPoints = getBorderPoints(pointsDeimension)
+
+            // at least, minimal points are needed to draw a shape
+            if borderPoints.count < minimalPointCount {
+                return
+            }
+
+            let equalizedPoints = equalizePoints(borderPoints)
+            let shapeLayer = drawLayer(equalizedPoints)
+
+            layer.addSublayer(shapeLayer)
         }
     }
 
-    private func getPointsDimension(_ mlMA: MLMultiArray, channel: Int = 0) -> [[CGPoint]] {
-        let channelCount = mlMA.shape[1].intValue
+    private func getPointsDimension(_ mlMA: MLMultiArray, _ targetChannelIndex: Int, _ bounds: CGRect) -> [[CGPoint]] {
         let outputHeight = mlMA.shape[2].intValue
         let outputWidth = mlMA.shape[3].intValue
 
@@ -83,24 +140,24 @@ class ObjectDetector {
 
         for y in 0..<outputHeight {
             for x in 0..<outputWidth {
-                let originValue = mlMA[[0, 0, y, x] as [NSNumber]].doubleValue
-                let secondValue = mlMA[[0, 2, y, x] as [NSNumber]].doubleValue
-                let thirdValue = mlMA[[0, 4, y, x] as [NSNumber]].doubleValue
-                let fourthValue = mlMA[[0, 6, y, x] as [NSNumber]].doubleValue
+                let score = mlMA[[0, targetChannelIndex, y, x] as [NSNumber]].floatValue
+                let outputX = Int(x * Int(layer.frame.width) / outputWidth)
+                let outputY = Int(y * Int(layer.frame.height) / outputHeight)
+                let targetPoint = CGPoint(x: outputX, y: outputY)
 
-                let detected =
-                    secondValue > threshold
-//                        && secondValue > 0.05
-//                        && thirdValue > -0.1
-//                && fourthValue > threshold
-                let target = CGPoint(x: Int(x * Int(layer.frame.width) / outputWidth), y: Int(y * Int(layer.frame.height) / outputHeight))
+                var isDetected = score > threshold
+                let isIntersected = bounds.contains(targetPoint)
 
-                if detected {
-                    points[y][x] = target
+                if isDetected, isIntersected {
+                    points[y][x] = targetPoint
                 }
             }
         }
         return points
+    }
+
+    private func sigmoid(_ score: Float) -> Float {
+        return 1.0 / (1.0 + exp(score))
     }
 
     private func getBorderPoints(_ pointsDeimension: [[CGPoint]]) -> [CGPoint] {
