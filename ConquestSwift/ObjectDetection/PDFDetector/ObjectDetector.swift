@@ -93,7 +93,6 @@ class ObjectDetector {
 
                         scopeBounds = CGRect(x: x, y: y, width: height, height: width)
                     }
-                    print("maxProbabilityIndex: \(maxProbabilityIndex)")
                 }
             }
 
@@ -145,7 +144,7 @@ class ObjectDetector {
                 let outputY = Int(y * Int(layer.frame.height) / outputHeight)
                 let targetPoint = CGPoint(x: outputX, y: outputY)
 
-                var isDetected = score > threshold
+                let isDetected = score > threshold
                 let isIntersected = bounds.contains(targetPoint)
 
                 if isDetected, isIntersected {

@@ -11,6 +11,8 @@ import UIKit
 import Vision
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+    private let cameraView = UIView()
+    private let flashView = UIView()
     private var previewLayer = AVCaptureVideoPreviewLayer()
     private var videoOutput = AVCaptureVideoDataOutput()
     private let session = AVCaptureSession()
@@ -22,10 +24,14 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     private var frameCounter = 0
     private var mlRequsetPerFPS = 5
 
+    var shutter = CameraShutter()
     var captureTriger = false
 
     override func viewDidLoad() {
         checkPermission()
+        setCameraView()
+        setFlashView()
+        setButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,9 +57,50 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
 }
 
-// MARK: SCREEN UI HANDLING
-
 extension CameraViewController {
+    private func setCameraView() {
+        view.addSubview(cameraView)
+        cameraView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cameraView.topAnchor.constraint(equalTo: view.topAnchor),
+            cameraView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            cameraView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cameraView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+
+    private func setFlashView() {
+        flashView.backgroundColor = .white
+        flashView.alpha = 0
+        flashView.frame = view.frame
+        flashView.isUserInteractionEnabled = false
+    }
+
+    private func setButton() {
+        view.addSubview(shutter)
+        view.bringSubviewToFront(shutter)
+
+        shutter.button.addTarget(self, action: #selector(capture), for: .touchUpInside)
+
+        shutter.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            shutter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            shutter.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -118),
+            shutter.widthAnchor.constraint(equalToConstant: shutter.layerWidth),
+            shutter.heightAnchor.constraint(equalToConstant: shutter.layerWidth)
+        ])
+    }
+
+    @objc private func capture() {
+        if captureTriger == false { print("Capture") }
+        captureTriger = true
+
+        view.addSubview(flashView)
+
+ 
+    }
+
     private func setupDetector() {
         objectDetector.loadML()
         objectDetector.layer.frame = CGRect(x: 0, y: 0, width: screenBounds.size.width, height: screenBounds.size.height)
@@ -149,7 +196,7 @@ extension CameraViewController {
         videoOutput.connection(with: .video)?.videoOrientation = .portrait
 
         DispatchQueue.main.async { [weak self] in
-            self!.view.layer.addSublayer(self!.previewLayer)
+            self!.cameraView.layer.addSublayer(self!.previewLayer)
         }
     }
 }

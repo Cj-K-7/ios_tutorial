@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01B3DA72B9A8A99006DD480 /* CameraShutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B3DA62B9A8A99006DD480 /* CameraShutter.swift */; };
 		D0529CA82B96EF6F009F6E60 /* GalleryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0529CA72B96EF6F009F6E60 /* GalleryImage.swift */; };
 		D0529CAD2B96FE91009F6E60 /* GalleryImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0529CAC2B96FE91009F6E60 /* GalleryImageScrollView.swift */; };
 		D0529CB42B97052D009F6E60 /* GalleryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0529CB32B97052D009F6E60 /* GalleryHeader.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D01B3DA62B9A8A99006DD480 /* CameraShutter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraShutter.swift; sourceTree = "<group>"; };
 		D0529CA72B96EF6F009F6E60 /* GalleryImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImage.swift; sourceTree = "<group>"; };
 		D0529CAC2B96FE91009F6E60 /* GalleryImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageScrollView.swift; sourceTree = "<group>"; };
 		D0529CB32B97052D009F6E60 /* GalleryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryHeader.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				D0F158992B96E7A100EC3FB4 /* test.mlmodel */,
 				D0C0311B2B908E030004D2F5 /* pdfDetector.mlpackage */,
 				D0889A722B90C7F3003E669C /* YOLO.mlmodel */,
+				D01B3DA62B9A8A99006DD480 /* CameraShutter.swift */,
 			);
 			path = PDFDetector;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				D0889A762B9173C0003E669C /* GalleryController.swift in Sources */,
 				D075FBF02B86F69B0021EF21 /* PageListView.swift in Sources */,
 				D075FBF42B870F960021EF21 /* PageViewController.swift in Sources */,
+				D01B3DA72B9A8A99006DD480 /* CameraShutter.swift in Sources */,
 				D0529CBB2B971297009F6E60 /* GalleryPageScrollView.swift in Sources */,
 				D091A51D2B882B1C00F2B93F /* Tool.swift in Sources */,
 				D091A5192B88218600F2B93F /* Toolkit.swift in Sources */,
