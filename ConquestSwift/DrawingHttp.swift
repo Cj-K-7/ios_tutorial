@@ -7,7 +7,7 @@
 import Foundation
 
 class DrawingHttpService {
-    private let baseDomain: String = "https://drawing-service.testbank.ai"
+    private let baseDomain: String = "https://dev-drawing-service.testbank.ai"
     private let apiKey: String = "tbk-drawing-api1!"
 
     private let baseURL: URL
@@ -31,16 +31,22 @@ class DrawingHttpService {
         return request
     }
 
-    func get() async throws -> Data {
+    func get(key: String) async throws -> Drawing? {
         var request = genURLRequest(path: "user-draws/key", method: "POST")
-        let body = RequestBody(key: "22842&a3a0e241-d52b-4b44-b0ad-685684735659&18570-1&1")
+        let body = RequestBody(key: key)
 
         request.httpBody = try JSONEncoder().encode(body)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let stringfied = String(data: data, encoding: .utf8)
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            let stringfied = String(data: data, encoding: .utf8)
 
-        return data
+            let canvasData = try JSONDecoder().decode(Drawing.self, from: data)
+            return canvasData
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }
 

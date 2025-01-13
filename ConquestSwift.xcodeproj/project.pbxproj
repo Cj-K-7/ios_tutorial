@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0C2A0F72D349D4C0056CE0F /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2A0F62D349D4C0056CE0F /* Untitled.swift */; };
 		D0C684852D30B693002057DE /* DrawingHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684842D30B68F002057DE /* DrawingHttp.swift */; };
 		D0C684872D30C88F002057DE /* DrawingStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684862D30C88C002057DE /* DrawingStruct.swift */; };
-		D0C684892D30CC1E002057DE /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684882D30CC1B002057DE /* Canvas.swift */; };
+		D0C684892D30CC1E002057DE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684882D30CC1B002057DE /* CanvasView.swift */; };
 		D0C6848D2D30D01B002057DE /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C6848C2D30D01A002057DE /* PageView.swift */; };
 		D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F7082B859A5300F30BCB /* AppDelegate.swift */; };
 		D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */; };
@@ -40,9 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D0C2A0F62D349D4C0056CE0F /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		D0C684842D30B68F002057DE /* DrawingHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingHttp.swift; sourceTree = "<group>"; };
 		D0C684862D30C88C002057DE /* DrawingStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStruct.swift; sourceTree = "<group>"; };
-		D0C684882D30CC1B002057DE /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		D0C684882D30CC1B002057DE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		D0C6848C2D30D01A002057DE /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		D0F4F7052B859A5300F30BCB /* ConquestSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConquestSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F4F7082B859A5300F30BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,8 +111,9 @@
 		D0F4F7072B859A5300F30BCB /* ConquestSwift */ = {
 			isa = PBXGroup;
 			children = (
+				D0C2A0F62D349D4C0056CE0F /* Untitled.swift */,
 				D0C6848C2D30D01A002057DE /* PageView.swift */,
-				D0C684882D30CC1B002057DE /* Canvas.swift */,
+				D0C684882D30CC1B002057DE /* CanvasView.swift */,
 				D0C684862D30C88C002057DE /* DrawingStruct.swift */,
 				D0C684842D30B68F002057DE /* DrawingHttp.swift */,
 				D0F4F70A2B859A5300F30BCB /* SceneDelegate.swift */,
@@ -288,10 +291,11 @@
 			files = (
 				D0C684852D30B693002057DE /* DrawingHttp.swift in Sources */,
 				D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */,
+				D0C2A0F72D349D4C0056CE0F /* Untitled.swift in Sources */,
 				D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */,
 				D0C684872D30C88F002057DE /* DrawingStruct.swift in Sources */,
 				D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */,
-				D0C684892D30CC1E002057DE /* Canvas.swift in Sources */,
+				D0C684892D30CC1E002057DE /* CanvasView.swift in Sources */,
 				D0C6848D2D30D01B002057DE /* PageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

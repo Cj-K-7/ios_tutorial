@@ -7,10 +7,22 @@
 import UIKit
 
 class PageView: UIImageView {
+    var ratio: Double = 0
+    var width: Double = 0
+    var height: Double = 0 {
+        didSet {
+            width = height * ratio
+            frame.size = CGSize(width: width, height: height)
+        }
+    }
+
     init() {
-        super.init(image: UIImage(named: "page"))
-        self.contentMode = .scaleAspectFit
-        self.translatesAutoresizingMaskIntoConstraints = false
+        guard let image = UIImage(named: "page") else {
+            fatalError("")
+        }
+        super.init(image: image)
+        ratio = image.size.width / image.size.height
+        contentMode = .scaleAspectFit
     }
 
     @available(*, unavailable)

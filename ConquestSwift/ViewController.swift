@@ -9,9 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
     private let drawingHttp: DrawingHttpService = .init()
+    let dumbAssSize = CGSize(width: 834.24, height: 632)
 
     // UIs
-    private let page = PageView()
+    private let pageView = PageView()
+    private let canvasView = CanvasView()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,23 +35,26 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        add(page) { page in
-            let constraints = [
-                page.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                page.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-                page.heightAnchor.constraint(equalTo: self.view.heightAnchor)
-            ]
+        add(pageView) { page in
+            page.frame.size = self.dumbAssSize
+            page.backgroundColor = .clear
+        }
 
-            page.backgroundColor = .gray
+        add(canvasView) { canvas in
+            self.view.bringSubviewToFront(canvas)
 
-            NSLayoutConstraint.activate(constraints)
+            canvas.frame.size = self.dumbAssSize
+            canvas.backgroundColor = .clear
         }
 
         Task {
             do {
-                let data = try await drawingHttp.get()
+                let data = try await drawingHttp.get(key: "1014&b6e122bb-aa46-4b75-8581-43e3d0fd2604&1844-1&1")
 
-                print(data)
+                guard let strokes = data?.strokes else { return }
+                canvasView.strokes = strokes
+                canvasView.setNeedsDisplay()
+
             } catch {}
         }
     }
