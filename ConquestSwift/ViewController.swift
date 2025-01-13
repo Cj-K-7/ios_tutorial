@@ -8,9 +8,10 @@ import SwiftUI
 import UIKit
 
 class ViewController: UIViewController {
-    private let toolkitController = ToolkitController()
-    private let cameraController = CameraViewController()
-    private let button = UIButton()
+    private let drawingHttp: DrawingHttpService = .init()
+
+    // UIs
+    private let page = PageView()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -31,7 +32,26 @@ extension ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addChildController(cameraController)
+
+        add(page) { page in
+            let constraints = [
+                page.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                page.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                page.heightAnchor.constraint(equalTo: self.view.heightAnchor)
+            ]
+
+            page.backgroundColor = .gray
+
+            NSLayoutConstraint.activate(constraints)
+        }
+
+        Task {
+            do {
+                let data = try await drawingHttp.get()
+
+                print(data)
+            } catch {}
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -40,12 +60,23 @@ extension ViewController {
     }
 }
 
-// MARK: - Sub handling
+// MARK: - Childs handling
 
 extension ViewController {
+    private func add(_ child: UIView, apply: ((UIView) -> Void)?) {
+        view.addSubview(child)
+        apply?(child)
+    }
+
+    private func remove(_ child: UIView) {
+        view.willRemoveSubview(child)
+        child.removeFromSuperview()
+    }
+
     private func addChildController(_ controller: UIViewController) {
         addChild(controller)
         view.addSubview(controller.view)
+        controller.view.frame = view.bounds
         controller.didMove(toParent: self)
     }
 
@@ -55,26 +86,3 @@ extension ViewController {
         controller.removeFromParent()
     }
 }
-
-#if DEBUG
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-        // Preview를 보고자 하는 Viewcontroller 이름
-        // e.g.)
-        return ViewController()
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
-}
-
-#endif
