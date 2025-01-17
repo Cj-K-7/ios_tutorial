@@ -35,28 +35,65 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let pageWidth = pageView.ratio * dumbAssSize.height
+        let pageSize = CGSize(width: pageWidth, height: dumbAssSize.height)
+        let offserX = (dumbAssSize.width - pageWidth) / 2
+
+        canvasView.offsetX = offserX
+
         add(pageView) { page in
-            page.frame.size = self.dumbAssSize
+            page.frame.size = pageSize
+            page.center = self.view.center
             page.backgroundColor = .clear
         }
 
         add(canvasView) { canvas in
             self.view.bringSubviewToFront(canvas)
 
-            canvas.frame.size = self.dumbAssSize
+            canvas.clipsToBounds = false
+            canvas.frame.size = pageSize
+            canvas.center = self.view.center
             canvas.backgroundColor = .clear
         }
 
         Task {
             do {
-                let data = try await drawingHttp.get(key: "1014&b6e122bb-aa46-4b75-8581-43e3d0fd2604&1844-1&1")
+                let data = try await drawingHttp.get(
+                    key: "35414&490ee101-19b0-4f8c-8c4e-83d759c955ae&12925-63&1"
+                )
 
-                guard let strokes = data?.strokes else { return }
-                canvasView.strokes = strokes
+                guard let drawingData = data else { return }
+
+                let bookId = drawingData.pageId.split(separator: "-")
+                print("asdasdasd \(drawingData)")
+
+//                pageView.setPage(bookId: <#T##String#>, pageIndex: <#T##Int#>)
+                canvasView.strokes = drawingData.strokes
                 canvasView.setNeedsDisplay()
-
-            } catch {}
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                    let updatedData = drawingData.copy(
+//                        strokes: self.canvasView.ratioStrokes
+//                    )
+//
+//                    let userDraw = UserDrawingData(userDrawList: [updatedData])
+//                    Task {
+//                        do {
+//                            try await self.drawingHttp.post(data: userDraw)
+//                        } catch {
+//                            print(error)
+//                        }
+//                    }
+//                    print("userData send")
+//                }
+            } catch {
+                print(error)
+            }
         }
+
+        print("view size \(view.frame.size)")
+
+        print("canvas size \(canvasView.frame.size)")
     }
 
     override func viewDidAppear(_ animated: Bool) {

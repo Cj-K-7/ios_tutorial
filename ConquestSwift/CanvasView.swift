@@ -8,11 +8,11 @@ import UIKit
 
 class CanvasView: UIView {
     let dumbAssRatio: Double = 2
-    let resizeRatio: Double = 4.0
-    let offsetX = 834.24 * 0.16
-    let size = CGSize(width: 834.24, height: 632)
-    var color = UIColor.red
+    var offsetX: Double = 0
+    var color = UIColor.gray
     var strokes: [Stroke] = [] // Store strokes to be drawn
+        
+    var ratioStrokes: [Stroke] = []
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -21,7 +21,7 @@ class CanvasView: UIView {
         
         for stroke in strokes {
             guard let firstPoint = stroke.paths.first else { continue }
-            
+            var portionPoints: [CGPoint] = []
             // Set up the stroke style
             context.setLineWidth(CGFloat(1))
             context.setStrokeColor(color.cgColor)
@@ -29,22 +29,41 @@ class CanvasView: UIView {
             // Create a path
             let path = UIBezierPath()
             let start = CGPoint(
-                x: firstPoint.x / dumbAssRatio,
+                x: firstPoint.x / dumbAssRatio - offsetX,
                 y: firstPoint.y / dumbAssRatio
             )
-            
             path.move(to: start)
+            
+            let portionOfStart = CGPoint(
+                x: start.x / frame.width,
+                y: start.y / frame.height
+            )
+            
+            portionPoints.append(portionOfStart)
             
             for point in stroke.paths.dropFirst() {
                 let move = CGPoint(
-                    x: point.x / dumbAssRatio,
+                    x: point.x / dumbAssRatio - offsetX,
                     y: point.y / dumbAssRatio
                 )
-                
                 path.addLine(to: move)
+                let portionOfMove = CGPoint(
+                    x: move.x / frame.width,
+                    y: move.y / frame.height
+                )
+                
+                portionPoints.append(portionOfMove)
             }
 
+            let newPortionStroke = stroke.copy(
+                paths: portionPoints.map { cgpoint in
+                    Path(x: cgpoint.x, y: cgpoint.y, force: nil)
+                }
+            )
+            
             path.stroke()
+            
+            ratioStrokes.append(newPortionStroke)
         }
     }
 }

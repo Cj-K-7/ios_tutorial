@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0C2A0F72D349D4C0056CE0F /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2A0F62D349D4C0056CE0F /* Untitled.swift */; };
+		D03BCF922D39E51C003E98C3 /* 12925.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D03BCF912D39E51C003E98C3 /* 12925.pdf */; };
 		D0C684852D30B693002057DE /* DrawingHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684842D30B68F002057DE /* DrawingHttp.swift */; };
 		D0C684872D30C88F002057DE /* DrawingStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684862D30C88C002057DE /* DrawingStruct.swift */; };
 		D0C684892D30CC1E002057DE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C684882D30CC1B002057DE /* CanvasView.swift */; };
@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D0C2A0F62D349D4C0056CE0F /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		D03BCF912D39E51C003E98C3 /* 12925.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 12925.pdf; sourceTree = "<group>"; };
 		D0C684842D30B68F002057DE /* DrawingHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingHttp.swift; sourceTree = "<group>"; };
 		D0C684862D30C88C002057DE /* DrawingStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStruct.swift; sourceTree = "<group>"; };
 		D0C684882D30CC1B002057DE /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		D0F4F7072B859A5300F30BCB /* ConquestSwift */ = {
 			isa = PBXGroup;
 			children = (
-				D0C2A0F62D349D4C0056CE0F /* Untitled.swift */,
+				D03BCF912D39E51C003E98C3 /* 12925.pdf */,
 				D0C6848C2D30D01A002057DE /* PageView.swift */,
 				D0C684882D30CC1B002057DE /* CanvasView.swift */,
 				D0C684862D30C88C002057DE /* DrawingStruct.swift */,
@@ -262,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03BCF922D39E51C003E98C3 /* 12925.pdf in Resources */,
 				D0F4F7152B859A5400F30BCB /* LaunchScreen.storyboard in Resources */,
 				D0F4F7122B859A5400F30BCB /* Assets.xcassets in Resources */,
 				D0F4F7102B859A5300F30BCB /* Main.storyboard in Resources */,
@@ -291,7 +292,6 @@
 			files = (
 				D0C684852D30B693002057DE /* DrawingHttp.swift in Sources */,
 				D0F4F7092B859A5300F30BCB /* AppDelegate.swift in Sources */,
-				D0C2A0F72D349D4C0056CE0F /* Untitled.swift in Sources */,
 				D0F4F70B2B859A5300F30BCB /* SceneDelegate.swift in Sources */,
 				D0C684872D30C88F002057DE /* DrawingStruct.swift in Sources */,
 				D0F4F70D2B859A5300F30BCB /* ViewController.swift in Sources */,
